@@ -1591,6 +1591,13 @@ namespace ts {
         return parameter && parameter.symbol;
     }
 
+    //!
+    /* @internal */
+    export function getJSDocCommented(node: JSDocAugmentsTag): Node {
+        Debug.assert(node.parent!.kind === SyntaxKind.JSDocComment);
+        return node.parent!.parent!;
+    }
+
     export function getTypeParameterFromJsDoc(node: TypeParameterDeclaration & { parent: JSDocTemplateTag }): TypeParameterDeclaration | undefined {
         const name = node.name.escapedText;
         const { typeParameters } = (node.parent.parent.parent as ts.SignatureDeclaration | ts.InterfaceDeclaration | ts.ClassDeclaration);

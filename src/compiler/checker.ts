@@ -4882,7 +4882,17 @@ namespace ts {
         }
 
         function getBaseTypeNodeOfClass(type: InterfaceType): ExpressionWithTypeArguments {
-            return getClassExtendsHeritageClauseElement(<ClassLikeDeclaration>type.symbol.valueDeclaration);
+            //prefer an @augments tag because it may have type parameters
+            //TODO: error if @augments tag and actual "extends" differ
+            const decl = <ClassLikeDeclaration>type.symbol.valueDeclaration;
+            if (isInJavaScriptFile(decl)) {
+                const tag = getJSDocAugmentsTag(decl);
+                if (tag) {
+                    return tag.class;
+                }
+            }
+
+            return getClassExtendsHeritageClauseElement(decl);
         }
 
         function getConstructorsForTypeArguments(type: Type, typeArgumentNodes: ReadonlyArray<TypeNode>, location: Node): Signature[] {
@@ -4898,6 +4908,8 @@ namespace ts {
             return sameMap(signatures, sig => some(sig.typeParameters) ? getSignatureInstantiation(sig, typeArguments, isInJavaScriptFile(location)) : sig);
         }
 
+        //This is the *static* side!
+        //If we see `/** @augments A<Foo> */ we should try getting 'A' as a value
         /**
          * The base constructor of a class can resolve to
          * * undefinedType if the class has no extends clause,
@@ -4915,7 +4927,9 @@ namespace ts {
                 if (!pushTypeResolution(type, TypeSystemPropertyName.ResolvedBaseConstructorType)) {
                     return unknownType;
                 }
-                const baseConstructorType = checkExpression(baseTypeNode.expression);
+                const baseConstructorType = //baseTypeNode.kind === SyntaxKind.ExpressionWithTypeArguments ?
+                    checkExpression(baseTypeNode.expression)
+                    //: checkPropertyAccessExpressionOrQualifiedName(baseTypeNode.typeName);
                 if (baseConstructorType.flags & (TypeFlags.Object | TypeFlags.Intersection)) {
                     // Resolving the members of a class requires us to resolve the base class of that class.
                     // We force resolution here such that we catch circularities now.
@@ -4926,7 +4940,7 @@ namespace ts {
                     return type.resolvedBaseConstructorType = unknownType;
                 }
                 if (!(baseConstructorType.flags & TypeFlags.Any) && baseConstructorType !== nullWideningType && !isConstructorType(baseConstructorType)) {
-                    error(baseTypeNode.expression, Diagnostics.Type_0_is_not_a_constructor_function_type, typeToString(baseConstructorType));
+                    error(getTypeReferenceName(baseTypeNode), Diagnostics.Type_0_is_not_a_constructor_function_type, typeToString(baseConstructorType));
                     return type.resolvedBaseConstructorType = unknownType;
                 }
                 type.resolvedBaseConstructorType = baseConstructorType;
@@ -4980,30 +4994,22 @@ namespace ts {
                 // we check that all instantiated signatures return the same type.
                 const constructors = getInstantiatedConstructorsForTypeArguments(baseConstructorType, baseTypeNode.typeArguments, baseTypeNode);
                 if (!constructors.length) {
-                    error(baseTypeNode.expression, Diagnostics.No_base_constructor_has_the_specified_number_of_type_arguments);
+                    error(getTypeReferenceName(baseTypeNode), Diagnostics.No_base_constructor_has_the_specified_number_of_type_arguments);
                     return;
                 }
                 baseType = getReturnTypeOfSignature(constructors[0]);
-            }
-
-            // In a JS file, you can use the @augments jsdoc tag to specify a base type with type parameters
-            const valueDecl = type.symbol.valueDeclaration;
-            if (valueDecl && isInJavaScriptFile(valueDecl)) {
-                const augTag = getJSDocAugmentsTag(type.symbol.valueDeclaration);
-                if (augTag && augTag.typeExpression && augTag.typeExpression.type) {
-                    baseType = getTypeFromTypeNode(augTag.typeExpression.type);
-                }
             }
 
             if (baseType === unknownType) {
                 return;
             }
             if (!isValidBaseType(baseType)) {
-                error(baseTypeNode.expression, Diagnostics.Base_constructor_return_type_0_is_not_a_class_or_interface_type, typeToString(baseType));
+                error(getTypeReferenceName(baseTypeNode), Diagnostics.Base_constructor_return_type_0_is_not_a_class_or_interface_type, typeToString(baseType));
                 return;
             }
+
             if (type === baseType || hasBaseType(baseType, type)) {
-                error(valueDecl, Diagnostics.Type_0_recursively_references_itself_as_a_base_type,
+                error(type.symbol.valueDeclaration, Diagnostics.Type_0_recursively_references_itself_as_a_base_type,
                     typeToString(type, /*enclosingDeclaration*/ undefined, TypeFormatFlags.WriteArrayAsGenericType));
                 return;
             }
@@ -6908,7 +6914,7 @@ namespace ts {
             return resolveEntityName(typeReferenceName, meaning) || unknownSymbol;
         }
 
-        function getTypeReferenceType(node: TypeReferenceType, symbol: Symbol) {
+        function getTypeReferenceType(node: TypeReferenceType, symbol: Symbol): Type {
             const typeArguments = typeArgumentsFromTypeReferenceNode(node); // Do unconditionally so we mark type arguments as referenced.
             if (symbol === unknownSymbol) {
                 return unknownType;
@@ -7015,7 +7021,7 @@ namespace ts {
                 }
                 if (!type) {
                     symbol = resolveTypeReferenceName(getTypeReferenceName(node), meaning);
-                    type = getTypeReferenceType(node, symbol);
+                    type = getTypeReferenceType(node, symbol);//inline this?
                 }
                 // Cache both the resolved symbol and the resolved type. The resolved symbol is needed in when we check the
                 // type reference in checkTypeReferenceOrExpressionWithTypeArguments.
@@ -19788,6 +19794,29 @@ namespace ts {
             }
         }
 
+        function checkJSDocAugmentsTag(node: JSDocAugmentsTag) {
+            //if the class we're extending doesn't match, error
+            const cls = ts.getJSDocCommented(node);
+            if (!isClassDeclaration(cls) && !isClassExpression(cls)) {
+                throw new Error("TODO"); //diagnostic
+            }
+
+            if (isPropertyAccessExpression(node.class.expression)) {
+                const name = node.class.expression.name;
+                const extend = getClassExtendsHeritageClauseElement(cls);
+                if (extend) {
+                    if (isPropertyAccessExpression(extend.expression)) {
+                        if (name.escapedText !== extend.expression.name.escapedText) {
+                            throw new Error("TODO");//diagnostic
+                        }
+                    }
+                }
+            }
+            else {
+                //TODO: do we report diagnostic anywhere?
+            }
+        }
+
         function checkJSDocComment(node: JSDoc) {
             if ((node as JSDoc).tags) {
                 for (const tag of (node as JSDoc).tags) {
@@ -22492,7 +22521,9 @@ namespace ts {
                     return checkSourceElement((<ParenthesizedTypeNode | TypeOperatorNode>node).type);
                 case SyntaxKind.JSDocTypedefTag:
                     return checkJSDocTypedefTag(node as JSDocTypedefTag);
-                case SyntaxKind.JSDocComment:
+                case SyntaxKind.JSDocAugmentsTag:
+                    return checkJSDocAugmentsTag(node as JSDocAugmentsTag);
+                case SyntaxKind.JSDocComment://redundant, we call checkJsDocComment specifically...
                     return checkJSDocComment(node as JSDoc);
                 case SyntaxKind.JSDocParameterTag:
                     return checkSourceElement((node as JSDocParameterTag).typeExpression);

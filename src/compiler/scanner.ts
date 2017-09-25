@@ -1966,7 +1966,7 @@ namespace ts {
             token = SyntaxKind.Unknown;
             precedingLineBreak = false;
 
-            tokenValue = undefined;
+            tokenValue = "";
             hasExtendedUnicodeEscape = false;
             tokenIsUnterminated = false;
         }

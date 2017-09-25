@@ -2161,7 +2161,8 @@ namespace ts {
 
     export interface JSDocAugmentsTag extends JSDocTag {
         kind: SyntaxKind.JSDocAugmentsTag;
-        typeExpression: JSDocTypeExpression;
+        class: ExpressionWithTypeArguments;//remember to assert that this contains qualified names...
+        //typeExpression: JSDocTypeExpression;
     }
 
     export interface JSDocClassTag extends JSDocTag {

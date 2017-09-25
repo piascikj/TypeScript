@@ -425,7 +425,7 @@ namespace ts.Completions {
                 if (tag.tagName.pos <= position && position <= tag.tagName.end) {
                     request = { kind: "JsDocTagName" };
                 }
-                if (isTagWithTypeExpression(tag) && tag.typeExpression && tag.typeExpression.kind === SyntaxKind.JSDocTypeExpression) {
+                if (isTagWithTypeExpression(tag) && tag.typeExpression && tag.typeExpression.kind === SyntaxKind.JSDocTypeExpression) {//todo: this no longer includes @augments
                     currentToken = getTokenAtPosition(sourceFile, position, /*includeJsDocComment*/ true);
                     if (!currentToken ||
                         (!isDeclarationName(currentToken) &&
@@ -581,11 +581,10 @@ namespace ts.Completions {
 
         return { symbols, isGlobalCompletion, isMemberCompletion, allowStringLiteral, isNewIdentifierLocation, location, isRightOfDot: (isRightOfDot || isRightOfOpenTag), request, keywordFilters };
 
-        type JSDocTagWithTypeExpression = JSDocAugmentsTag | JSDocParameterTag | JSDocPropertyTag | JSDocReturnTag | JSDocTypeTag | JSDocTypedefTag;
+        type JSDocTagWithTypeExpression = JSDocParameterTag | JSDocPropertyTag | JSDocReturnTag | JSDocTypeTag | JSDocTypedefTag;
 
         function isTagWithTypeExpression(tag: JSDocTag): tag is JSDocTagWithTypeExpression {
             switch (tag.kind) {
-                case SyntaxKind.JSDocAugmentsTag:
                 case SyntaxKind.JSDocParameterTag:
                 case SyntaxKind.JSDocPropertyTag:
                 case SyntaxKind.JSDocReturnTag:

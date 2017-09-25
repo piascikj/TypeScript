@@ -424,7 +424,7 @@ namespace ts {
             case SyntaxKind.JSDocTypeTag:
                 return visitNode(cbNode, (<JSDocTypeTag>node).typeExpression);
             case SyntaxKind.JSDocAugmentsTag:
-                return visitNode(cbNode, (<JSDocAugmentsTag>node).typeExpression);
+                return visitNode(cbNode, (<JSDocAugmentsTag>node).class);
             case SyntaxKind.JSDocTemplateTag:
                 return visitNodes(cbNode, cbNodes, (<JSDocTemplateTag>node).typeParameters);
             case SyntaxKind.JSDocTypedefTag:
@@ -4316,7 +4316,7 @@ namespace ts {
                 case SyntaxKind.AmpersandToken:                 // foo<x> &
                 case SyntaxKind.BarToken:                       // foo<x> |
                 case SyntaxKind.CloseBraceToken:                // foo<x> }
-                case SyntaxKind.EndOfFileToken:                 // foo<x>
+                //case SyntaxKind.EndOfFileToken:                 // foo<x>
                     // these cases can't legally follow a type arg list.  However, they're not legal
                     // expressions either.  The user is probably in the middle of a generic type. So
                     // treat it as such.
@@ -6604,12 +6604,10 @@ namespace ts {
                 }
 
                 function parseAugmentsTag(atToken: AtToken, tagName: Identifier): JSDocAugmentsTag {
-                    const typeExpression = parseJSDocTypeExpression(/*requireBraces*/ true);
-
                     const result = <JSDocAugmentsTag>createNode(SyntaxKind.JSDocAugmentsTag, atToken.pos);
                     result.atToken = atToken;
                     result.tagName = tagName;
-                    result.typeExpression = typeExpression;
+                    result.class = parseExpressionWithTypeArguments();//parseTypeReference();
                     return finishNode(result);
                 }
 
