@@ -11,7 +11,7 @@ goTo.marker("1");
 
 verify.completionListContains("I");
 verify.completionListContains("TString");
-verify.completionListContains("TNumber"); // REVIEW: Is this intended behavior?
+verify.completionListContains("TNumber"); // REVIEW: Is this intended behavior? id:426 gh:427
 
 // Ideally the following shouldn't show up since they're not types.
 verify.not.completionListContains("foo");

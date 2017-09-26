@@ -2489,7 +2489,7 @@ declare namespace ts {
          * Hook used by transformers to substitute expressions just before they
          * are emitted by the pretty printer.
          *
-         * NOTE: Transformation hooks should only be modified during `Transformer` initialization,
+         * NOTE: Transformation hooks should only be modified during `Transformer` initialization, id:75 gh:76
          * before returning the `NodeTransformer` callback.
          */
         onSubstituteNode: (hint: EmitHint, node: Node) => Node;
@@ -2507,7 +2507,7 @@ declare namespace ts {
          * Hook used to allow transformers to capture state before or after
          * the printer emits a node.
          *
-         * NOTE: Transformation hooks should only be modified during `Transformer` initialization,
+         * NOTE: Transformation hooks should only be modified during `Transformer` initialization, id:73 gh:74
          * before returning the `NodeTransformer` callback.
          */
         onEmitNode: (hint: EmitHint, node: Node, emitCallback: (hint: EmitHint, node: Node) => void) => void;

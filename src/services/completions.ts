@@ -67,7 +67,7 @@ namespace ts.Completions {
             getCompletionEntriesFromSymbols(symbols, entries, location, /*performCharacterChecks*/ true, typeChecker, compilerOptions.target, log, allowStringLiteral);
         }
 
-        // TODO add filter for keyword based on type/value/namespace and also location
+        // TODO add filter for keyword based on type/value/namespace and also location id:370 gh:371
 
         // Add all keywords if
         // - this is not a member completion list (all the keywords)
@@ -118,7 +118,7 @@ namespace ts.Completions {
             return undefined;
         }
 
-        // TODO(drosen): Right now we just permit *all* semantic meanings when calling
+        // TODO (drosen): Right now we just permit *all* semantic meanings when calling id:277 gh:278
         // 'getSymbolKind' which is permissible given that it is backwards compatible; but
         // really we should consider passing the meaning for the node so that we don't report
         // that a suggestion for a value is an interface.  We COULD also just do what
@@ -375,7 +375,7 @@ namespace ts.Completions {
         let request: Request | undefined;
 
         let start = timestamp();
-        let currentToken = getTokenAtPosition(sourceFile, position, /*includeJsDocComment*/ false); // TODO: GH#15853
+        let currentToken = getTokenAtPosition(sourceFile, position, /*includeJsDocComment*/ false); // TODO: GH#15853 id:201 gh:202
         // We will check for jsdoc comments with insideComment and getJsDocTagAtPosition. (TODO: that seems rather inefficient to check the same thing so many times.)
 
         log("getCompletionData: Get current token: " + (timestamp() - start));
@@ -476,7 +476,7 @@ namespace ts.Completions {
         let isRightOfOpenTag = false;
         let isStartingCloseTag = false;
 
-        let location = getTouchingPropertyName(sourceFile, position, insideJsDocTagTypeExpression); // TODO: GH#15853
+        let location = getTouchingPropertyName(sourceFile, position, insideJsDocTagTypeExpression); // TODO: GH#15853 id:270 gh:271
         if (contextToken) {
             // Bail out if this is a known invalid completion location
             if (isCompletionListBlocker(contextToken)) {
@@ -1507,8 +1507,8 @@ namespace ts.Completions {
                     }
                 }
                 else {
-                    // TODO: Account for computed property name
-                    // NOTE: if one only performs this step when m.name is an identifier,
+                    // TODO: Account for computed property name id:334 gh:335
+                    // NOTE: if one only performs this step when m.name is an identifier, id:373 gh:375
                     // things like '__proto__' are not filtered out.
                     const name = getNameOfDeclaration(m);
                     existingName = getEscapedTextOfIdentifierOrLiteral(name as (Identifier | LiteralExpression));
@@ -1643,7 +1643,7 @@ namespace ts.Completions {
         // e.g "b a" is valid quoted name but when we strip off the quotes, it is invalid.
         // We, thus, need to check if whatever was inside the quotes is actually a valid identifier name.
         if (performCharacterChecks && !isIdentifierText(name, target)) {
-            // TODO: GH#18169
+            // TODO: GH#18169 id:279 gh:280
             return allowStringLiteral ? JSON.stringify(name) : undefined;
         }
 

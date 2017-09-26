@@ -9,7 +9,7 @@ namespace ts.codefix {
         const sourceFile = context.sourceFile;
         const node = getTokenAtPosition(sourceFile, context.span.start, /*includeJsDocComment*/ false);
 
-        // NOTE: Some locations are not handled yet:
+        // NOTE: Some locations are not handled yet: id:266 gh:267
         // MappedTypeNode.typeParameters and SignatureDeclaration.typeParameters, as well as CallExpression.typeArguments
         const decl = ts.findAncestor(node,
                                      n =>

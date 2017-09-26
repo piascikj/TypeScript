@@ -1093,7 +1093,7 @@ namespace ts.server {
             const startPosition = scriptInfo.lineOffsetToPosition(args.line, args.offset);
             const endPosition = scriptInfo.lineOffsetToPosition(args.endLine, args.endOffset);
 
-            // TODO: avoid duplicate code (with formatonkey)
+            // TODO: avoid duplicate code (with formatonkey) id:268 gh:269
             const edits = project.getLanguageService(/*ensureSynchronized*/ false).getFormattingEditsForRange(file, startPosition, endPosition,
                 this.projectService.getFormatCodeOptions(file));
             if (!edits) {
@@ -1667,17 +1667,17 @@ namespace ts.server {
         private handlers = createMapFromTemplate<(request: protocol.Request) => { response?: any, responseRequired?: boolean }>({
             [CommandNames.OpenExternalProject]: (request: protocol.OpenExternalProjectRequest) => {
                 this.projectService.openExternalProject(request.arguments, /*suppressRefreshOfInferredProjects*/ false);
-                // TODO: report errors
+                // TODO: report errors id:195 gh:196
                 return this.requiredResponse(/*response*/ true);
             },
             [CommandNames.OpenExternalProjects]: (request: protocol.OpenExternalProjectsRequest) => {
                 this.projectService.openExternalProjects(request.arguments.projects);
-                // TODO: report errors
+                // TODO: report errors id:254 gh:255
                 return this.requiredResponse(/*response*/ true);
             },
             [CommandNames.CloseExternalProject]: (request: protocol.CloseExternalProjectRequest) => {
                 this.projectService.closeExternalProject(request.arguments.projectFileName);
-                // TODO: report errors
+                // TODO: report errors id:326 gh:328
                 return this.requiredResponse(/*response*/ true);
             },
             [CommandNames.SynchronizeProjectList]: (request: protocol.SynchronizeProjectListRequest) => {
@@ -1701,7 +1701,7 @@ namespace ts.server {
             [CommandNames.ApplyChangedToOpenFiles]: (request: protocol.ApplyChangedToOpenFilesRequest) => {
                 this.projectService.applyChangesInOpenFiles(request.arguments.openFiles, request.arguments.changedFiles, request.arguments.closedFiles);
                 this.changeSeq++;
-                // TODO: report errors
+                // TODO: report errors id:366 gh:367
                 return this.requiredResponse(/*response*/ true);
             },
             [CommandNames.Exit]: () => {

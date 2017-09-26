@@ -209,7 +209,7 @@ namespace ts {
         getSyntacticDiagnostics(fileName: string): Diagnostic[];
         getSemanticDiagnostics(fileName: string): Diagnostic[];
 
-        // TODO: Rename this to getProgramDiagnostics to better indicate that these are any
+        // TODO: Rename this to getProgramDiagnostics to better indicate that these are any id:296 gh:297
         // diagnostics present for the program level, and not just 'options' diagnostics.
         getCompilerOptionsDiagnostics(): Diagnostic[];
 
@@ -466,7 +466,7 @@ namespace ts {
         name: string;
         kind: ScriptElementKind;
         kindModifiers: string;
-        matchKind: string; // TODO: keyof typeof PatternMatchKind; (https://github.com/Microsoft/TypeScript/issues/15102)
+        matchKind: string; // TODO: keyof typeof PatternMatchKind; (https://github.com/Microsoft/TypeScript/issues/15102) id:253 gh:254
         isCaseSensitive: boolean;
         fileName: string;
         textSpan: TextSpan;

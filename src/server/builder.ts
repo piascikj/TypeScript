@@ -81,7 +81,7 @@ namespace ts.server {
 
         /**
          * stores set of files from the project.
-         * NOTE: this field is created on demand and should not be accessed directly.
+         * NOTE: this field is created on demand and should not be accessed directly. id:236 gh:237
          * Use 'getFileInfos' instead.
          */
         private fileInfos_doNotAccessDirectly: Map<T>;

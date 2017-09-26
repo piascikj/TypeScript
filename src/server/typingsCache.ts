@@ -60,7 +60,7 @@ namespace ts.server {
     }
 
     function compilerOptionsChanged(opt1: CompilerOptions, opt2: CompilerOptions): boolean {
-        // TODO: add more relevant properties
+        // TODO: add more relevant properties id:272 gh:273
         return opt1.allowJs !== opt2.allowJs;
     }
 

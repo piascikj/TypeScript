@@ -189,7 +189,7 @@ module TypeScript {
 
         // if this is not a method, but enclosed by class, use constructor as
         // the enclosing scope
-        // REVIEW: Some twisted logic here - this needs to be cleaned up once old classes are removed
+        // REVIEW: Some twisted logic here - this needs to be cleaned up once old classes are removed id:415 gh:416
         //  - if it's a new class, always use the contained scope, since we initialize the constructor scope below
         if (context.scopeChain.thisType &&
             (!funcDecl.isConstructor || hasFlag(funcDecl.fncFlags, FncFlags.ClassMethod))) {
@@ -263,7 +263,7 @@ module TypeScript {
                 }
             }
 
-            // REVIEW: We don't search for another sym for accessors to prevent us from
+            // REVIEW: We don't search for another sym for accessors to prevent us from id:501 gh:502
             // accidentally coalescing function signatures with the same name (E.g., a function
             // 'f' the outer scope and a setter 'f' in an object literal within that scope)
             if (nameText && nameText != "__missing" && !funcDecl.isAccessor()) {
@@ -271,7 +271,7 @@ module TypeScript {
                     fgSym = funcScope.findLocal(nameText, false, false);
                 }
                 else {
-                    // REVIEW: This logic should be symmetric with preCollectClassTypes
+                    // REVIEW: This logic should be symmetric with preCollectClassTypes id:389 gh:385
                     fgSym = funcScope.findLocal(nameText, false, false);
                 }
             }
@@ -315,7 +315,7 @@ module TypeScript {
         var ambientFuncStaticTable = new StringHashTable();
         var ambientFuncStaticMembers = new ScopedMembers(new DualStringHashTable(ambientFuncStaticTable, new StringHashTable()));
 
-        // REVIEW: Is it a problem that this is being set twice for properties and constructors?
+        // REVIEW: Is it a problem that this is being set twice for properties and constructors? id:452 gh:453
         funcDecl.unitIndex = context.typeFlow.checker.locationInfo.unitIndex;
 
         var locals = new SymbolScopeBuilder(funcMembers, ambientFuncMembers, null, null, parentScope, localContainer);
@@ -378,7 +378,7 @@ module TypeScript {
     export function preAssignCatchScopes(ast: AST, context: AssignScopeContext) {
         var catchBlock = <Catch>ast;
         if (catchBlock.param) {
-            var catchTable = new ScopedMembers(new DualStringHashTable(new StringHashTable(), new StringHashTable())); // REVIEW: Should we be allocating a public table instead of a private one?
+            var catchTable = new ScopedMembers(new DualStringHashTable(new StringHashTable(), new StringHashTable())); // REVIEW: Should we be allocating a public table instead of a private one? id:477 gh:478
             var catchLocals = new SymbolScopeBuilder(catchTable, null, null, null, context.scopeChain.scope,
                                                    context.scopeChain.scope.container);
             catchBlock.containedScope = catchLocals;

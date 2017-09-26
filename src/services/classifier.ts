@@ -699,7 +699,7 @@ namespace ts {
                 // specially.
                 const docCommentAndDiagnostics = parseIsolatedJSDocComment(sourceFile.text, start, width);
                 if (docCommentAndDiagnostics && docCommentAndDiagnostics.jsDoc) {
-                    // TODO: This should be predicated on `token["kind"]` being compatible with `HasJSDoc["kind"]`
+                    // TODO: This should be predicated on `token["kind"]` being compatible with `HasJSDoc["kind"]` id:368 gh:369
                     docCommentAndDiagnostics.jsDoc.parent = token as HasJSDoc;
                     classifyJSDocComment(docCommentAndDiagnostics.jsDoc);
                     return;
@@ -915,11 +915,11 @@ namespace ts {
                 return token.parent.kind === SyntaxKind.JsxAttribute ? ClassificationType.jsxAttributeStringLiteralValue : ClassificationType.stringLiteral;
             }
             else if (tokenKind === SyntaxKind.RegularExpressionLiteral) {
-                // TODO: we should get another classification type for these literals.
+                // TODO: we should get another classification type for these literals. id:275 gh:276
                 return ClassificationType.stringLiteral;
             }
             else if (isTemplateLiteralKind(tokenKind)) {
-                // TODO (drosen): we should *also* get another classification type for these literals.
+                // TODO (drosen): we should *also* get another classification type for these literals. id:199 gh:200
                 return ClassificationType.stringLiteral;
             }
             else if (tokenKind === SyntaxKind.JsxText) {

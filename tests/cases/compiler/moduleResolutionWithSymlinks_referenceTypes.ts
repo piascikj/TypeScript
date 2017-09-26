@@ -1,5 +1,5 @@
 // Symlinks are always resolved for type reference directives.
-// NOTE: This test would still compile without errors even if they were not,
+// NOTE: This test would still compile without errors even if they were not, id:350 gh:351
 // because `processTypeReferenceDirective` also checks for textual equivalence of file contents.
 // But the `moduleResolutionWithSymlinks_referenceTypes.trace.json` shows the difference.
 

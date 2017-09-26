@@ -269,7 +269,7 @@ namespace ts.server {
     }
 
     /**
-     * TODO: enforce invariants:
+     * TODO: enforce invariants: id:255 gh:256
      *  - script info can be never migrate to state - root file in inferred project, this is only a starting point
      *  - if script info has more that one containing projects - it is not a root file in inferred project because:
      *    - references in inferred project supercede the root part
@@ -647,7 +647,7 @@ namespace ts.server {
 
             info.stopWatcher();
 
-            // TODO: handle isOpen = true case
+            // TODO: handle isOpen = true case id:187 gh:188
 
             if (!info.isScriptOpen()) {
                 this.filenameToScriptInfo.delete(info.path);
@@ -682,7 +682,7 @@ namespace ts.server {
             this.logger.info(`Type root file ${fileName} changed`);
             this.throttledOperations.schedule(project.getConfigFilePath() + " * type root", /*delay*/ 250, () => {
                 project.updateTypes();
-                this.updateConfiguredProject(project); // TODO: Figure out why this is needed (should be redundant?)
+                this.updateConfiguredProject(project); // TODO: Figure out why this is needed (should be redundant?) id:240 gh:241
                 this.refreshInferredProjects();
             });
         }
@@ -741,7 +741,7 @@ namespace ts.server {
          * This is the callback function when a watched directory has an added tsconfig file.
          */
         private onConfigFileAddedForInferredProject(fileName: string) {
-            // TODO: check directory separators
+            // TODO: check directory separators id:318 gh:319
             if (getBaseFileName(fileName) !== "tsconfig.json") {
                 this.logger.info(`${fileName} is not tsconfig.json`);
                 return;
@@ -1377,7 +1377,7 @@ namespace ts.server {
                 // ignore inferred projects that don't contain the root's path
                 if (!containsPath(project.projectRootPath, root.path, this.host.getCurrentDirectory(), !this.host.useCaseSensitiveFileNames)) continue;
                 // ignore inferred projects that are higher up in the project root.
-                // TODO(rbuckton): Should we add the file as a root to these as well?
+                // TODO (rbuckton): Should we add the file as a root to these as well? id:360 gh:361
                 if (bestMatch && bestMatch.projectRootPath.length > project.projectRootPath.length) continue;
                 bestMatch = project;
             }
@@ -1923,7 +1923,7 @@ namespace ts.server {
                     let project = this.findConfiguredProjectByProjectName(tsconfigFile);
                     if (!project) {
                         const result = this.openConfigFile(tsconfigFile);
-                        // TODO: save errors
+                        // TODO: save errors id:261 gh:262
                         project = result.success && result.project;
                     }
                     if (project && !contains(exisingConfigFiles, tsconfigFile)) {

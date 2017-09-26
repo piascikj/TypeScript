@@ -46,7 +46,7 @@ namespace ts {
      *     if (state === "break") break;
      * }
      *
-     * NOTE: values to out parameters are not copies if loop is abrupted with 'return' - in this case this will end the entire enclosing function
+     * NOTE: values to out parameters are not copies if loop is abrupted with 'return' - in this case this will end the entire enclosing function id:317 gh:318
      * so nobody can observe this new value.
      */
     interface LoopOutParameter {
@@ -187,7 +187,7 @@ namespace ts {
         ForInOrForOfStatement = 1 << 11,        // Enclosing block-scoped container is a ForInStatement or ForOfStatement
         ConstructorWithCapturedSuper = 1 << 12, // Enclosed in a constructor that captures 'this' for use with 'super'
         ComputedPropertyName = 1 << 13,         // Enclosed in a computed property name
-        // NOTE: do not add more ancestor flags without also updating AncestorFactsMask below.
+        // NOTE: do not add more ancestor flags without also updating AncestorFactsMask below. id:228 gh:229
 
         //
         // Ancestor masks
@@ -2789,7 +2789,7 @@ namespace ts {
                 }
                 else {
                     // this is top level converted loop so we need to create an alias for 'this' here
-                    // NOTE:
+                    // NOTE: id:172 gh:173
                     // if converted loops were all nested in arrow function then we'll always emit '_this' so convertedLoopState.thisName will not be set.
                     // If it is set this means that all nested loops are not nested in arrow function and it is safe to capture 'this'.
                     (extraVariableDeclarations || (extraVariableDeclarations = [])).push(
@@ -2879,7 +2879,7 @@ namespace ts {
             const statements: Statement[] = [];
             // loop is considered simple if it does not have any return statements or break\continue that transfer control outside of the loop
             // simple loops are emitted as just 'loop()';
-            // NOTE: if loop uses only 'continue' it still will be emitted as simple loop
+            // NOTE: if loop uses only 'continue' it still will be emitted as simple loop id:221 gh:222
             const isSimpleLoop =
                 !(state.nonLocalJumps & ~Jump.Continue) &&
                 !state.labeledNonLocalBreaks &&
@@ -3658,7 +3658,7 @@ namespace ts {
                 }
             }
 
-            // NOTE: The parentheses here is entirely optional as we are now able to auto-
+            // NOTE: The parentheses here is entirely optional as we are now able to auto- id:267 gh:268
             //       parenthesize when rebuilding the tree. This should be removed in a
             //       future version. It is here for now to match our existing emit.
             return createParen(
@@ -3896,7 +3896,7 @@ namespace ts {
 
         /**
          * Determines whether a name is the name of a declaration with a colliding name.
-         * NOTE: This function expects to be called with an original source tree node.
+         * NOTE: This function expects to be called with an original source tree node. id:320 gh:321
          *
          * @param node An original source tree node.
          */

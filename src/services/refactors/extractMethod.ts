@@ -784,7 +784,7 @@ namespace ts.refactor.extractMethod {
             Debug.assert(fileName === renameFilename);
             for (const change of textChanges) {
                 const { span, newText } = change;
-                // TODO(acasey): We are assuming that the call expression comes before the function declaration,
+                // TODO (acasey): We are assuming that the call expression comes before the function declaration, id:207 gh:208
                 // because we want the new cursor to be on the call expression,
                 // which is closer to where the user was before extracting the function.
                 const index = newText.indexOf(functionNameText);

@@ -624,7 +624,7 @@ namespace ts {
         return [...array1, ...array2];
     }
 
-    // TODO: fixme (N^2) - add optional comparer so collection can be sorted before deduplication.
+    // TODO: fixme (N^2) - add optional comparer so collection can be sorted before deduplication. id:256 gh:257
     export function deduplicate<T>(array: ReadonlyArray<T>, areEqual?: (a: T, b: T) => boolean): T[] {
         let result: T[];
         if (array) {

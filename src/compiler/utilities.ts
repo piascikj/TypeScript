@@ -789,7 +789,7 @@ namespace ts {
                     case SyntaxKind.NewExpression:
                         return (<CallExpression>parent).typeArguments && indexOf((<CallExpression>parent).typeArguments, node) >= 0;
                     case SyntaxKind.TaggedTemplateExpression:
-                        // TODO (drosen): TaggedTemplateExpressions may eventually support type arguments.
+                        // TODO (drosen): TaggedTemplateExpressions may eventually support type arguments. id:297 gh:298
                         return false;
                 }
         }
@@ -3856,7 +3856,7 @@ namespace ts {
                 return false;
             }
 
-            // TODO: Add codePage support for readFile?
+            // TODO: Add codePage support for readFile? id:328 gh:330
             let fileContents = "";
             try {
                 fileContents = sys.readFile(filePath);
@@ -5547,7 +5547,7 @@ namespace ts {
         return node.kind === SyntaxKind.JSDocComment || isJSDocTag(node);
     }
 
-    // TODO: determine what this does before making it public.
+    // TODO: determine what this does before making it public. id:237 gh:238
     /* @internal */
     export function isJSDocTag(node: Node): boolean {
         return node.kind >= SyntaxKind.FirstJSDocTagNode && node.kind <= SyntaxKind.LastJSDocTagNode;

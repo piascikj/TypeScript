@@ -13,7 +13,7 @@ module TypeScript {
         public type: Type = null;
         public flags = ASTFlags.Writeable;
 
-        // REVIEW: for diagnostic purposes
+        // REVIEW: for diagnostic purposes id:406 gh:407
         public passCreated: number = CompilerDiagnostics.analysisPass;
 
         public preComments: Comment[] = null;
@@ -366,7 +366,7 @@ module TypeScript {
 
         public addToControlFlow(context: ControlFlowContext): void {
             super.addToControlFlow(context);
-            // TODO: add successor as catch block/finally block if present
+            // TODO: add successor as catch block/finally block if present id:496 gh:497
             if (this.nodeType == NodeType.Throw) {
                 context.returnStmt();
             }
@@ -425,7 +425,7 @@ module TypeScript {
                     return this;
 
                 case NodeType.Void:
-                    // REVIEW - Although this is good to do for completeness's sake,
+                    // REVIEW - Although this is good to do for completeness's sake, id:374 gh:376
                     // this shouldn't be strictly necessary from the void operator's
                     // point of view
                     this.operand = typeFlow.typeCheck(this.operand);
@@ -836,7 +836,7 @@ module TypeScript {
 
         public emit(emitter: Emitter, tokenId: TokenID, startLine: boolean) {
             var mod = <ModuleType>this.alias.type;
-            // REVIEW: Only modules may be aliased for now, though there's no real
+            // REVIEW: Only modules may be aliased for now, though there's no real id:420 gh:421
             // restriction on what the type symbol may be
             if (!this.isDynamicImport || (this.id.sym && !(<TypeSymbol>this.id.sym).onlyReferencedAsTypeRef)) {
                 var prevModAliasId = emitter.modAliasId;
@@ -1499,7 +1499,7 @@ module TypeScript {
             }
             context.current = afterLoop;
             condBlock.addSuccessor(afterLoop);
-            // TODO: check for while (true) and then only continue if afterLoop has predecessors
+            // TODO: check for while (true) and then only continue if afterLoop has predecessors id:456 gh:458
             context.noContinuation = false;
             context.walker.options.goChildren = false;
         }
@@ -1552,7 +1552,7 @@ module TypeScript {
                 var loopEnd = context.current;
                 loopEnd.addSuccessor(loopStart);
                 context.addContent(this.cond);
-                // TODO: check for while (true) 
+                // TODO: check for while (true)  id:407 gh:408
                 context.current = afterLoop;
                 loopEnd.addSuccessor(afterLoop);
             }
@@ -2037,12 +2037,12 @@ module TypeScript {
             return this;
         }
 
-        // TODO: more reasoning about unreachable cases (such as duplicate literals as case expressions)
+        // TODO: more reasoning about unreachable cases (such as duplicate literals as case expressions) id:497 gh:498
         // for now, assume all cases are reachable, regardless of whether some cases fall through
         public addToControlFlow(context: ControlFlowContext) {
             var execBlock = new BasicBlock();
             var sw = context.currentSwitch[context.currentSwitch.length - 1];
-            // TODO: fall-through from previous (+ to end of switch)
+            // TODO: fall-through from previous (+ to end of switch) id:377 gh:378
             if (this.expr) {
                 var exprBlock = new BasicBlock();
                 context.current = exprBlock;
@@ -2282,7 +2282,7 @@ module TypeScript {
             this.body = typeFlow.typeCheck(this.body);
 
             // if we're in provisional typecheck mode, clean up the symbol entry
-            // REVIEW: This is obviously bad form, since we're counting on the internal
+            // REVIEW: This is obviously bad form, since we're counting on the internal id:424 gh:425
             // layout of the symbol table, but this is also the only place where we insert
             // symbols during typecheck
             if (typeFlow.checker.inProvisionalTypecheckMode()) {

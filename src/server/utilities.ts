@@ -38,7 +38,7 @@ namespace ts.server {
             case ProjectKind.Configured:
                 return <Path>getDirectoryPath(project.getProjectName());
             case ProjectKind.Inferred:
-                // TODO: fixme
+                // TODO: fixme id:329 gh:326
                 return <Path>"";
             case ProjectKind.External:
                 const projectName = normalizeSlashes(project.getProjectName());

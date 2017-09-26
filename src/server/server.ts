@@ -592,7 +592,7 @@ namespace ts.server {
         return new Logger(logFileName, envLogOptions.traceToConsole, logVerbosity);
     }
     // This places log file in the directory containing editorServices.js
-    // TODO: check that this location is writable
+    // TODO: check that this location is writable id:323 gh:324
 
     // average async stat takes about 30 microseconds
     // set chunk size to do 30 files in < 1 millisecond
@@ -675,7 +675,7 @@ namespace ts.server {
         }
     }
 
-    // REVIEW: for now this implementation uses polling.
+    // REVIEW: for now this implementation uses polling. id:364 gh:365
     // The advantage of polling is that it works reliably
     // on all os and with network mounted files.
     // For 90 referenced files, the average time to detect

@@ -2,7 +2,7 @@
  * Declaration module describing the TypeScript Server protocol
  */
 namespace ts.server.protocol {
-    // NOTE: If updating this, be sure to also update `allCommandNames` in `harness/unittests/session.ts`.
+    // NOTE: If updating this, be sure to also update `allCommandNames` in `harness/unittests/session.ts`. id:189 gh:190
     export const enum CommandTypes {
         Brace = "brace",
         /* @internal */
@@ -103,7 +103,7 @@ namespace ts.server.protocol {
         /* @internal */
         GetEditsForRefactorFull = "getEditsForRefactor-full",
 
-        // NOTE: If updating this, be sure to also update `allCommandNames` in `harness/unittests/session.ts`.
+        // NOTE: If updating this, be sure to also update `allCommandNames` in `harness/unittests/session.ts`. id:243 gh:245
     }
 
     /**
@@ -218,7 +218,7 @@ namespace ts.server.protocol {
     }
 
     /**
-     * A request to get TODO comments from the file
+     * A request to get TODO comments from the file id:321 gh:322
      */
     export interface TodoCommentRequest extends FileRequest {
         command: CommandTypes.TodoComments;
@@ -230,7 +230,7 @@ namespace ts.server.protocol {
      */
     export interface TodoCommentRequestArgs extends FileRequestArgs {
         /**
-         * Array of target TodoCommentDescriptors that describes TODO comments to be found
+         * Array of target TodoCommentDescriptors that describes TODO comments to be found id:362 gh:363
          */
         descriptors: TodoCommentDescriptor[];
     }
@@ -1358,7 +1358,7 @@ namespace ts.server.protocol {
 
     /**
      * Request to obtain the list of files that should be regenerated if target file is recompiled.
-     * NOTE: this us query-only operation and does not generate any output on disk.
+     * NOTE: this us query-only operation and does not generate any output on disk. id:264 gh:265
      */
     export interface CompileOnSaveAffectedFileListRequest extends FileRequest {
         command: CommandTypes.CompileOnSaveAffectedFileList;

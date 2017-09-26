@@ -154,7 +154,7 @@ module TypeScript {
         var importDecl = <ImportDeclaration>ast;
         var isExported = hasFlag(importDecl.varFlags, VarFlags.Exported);
 
-        // REVIEW: technically, this call isn't strictly necessary, since we'll find the type during the call to resolveTypeMembers
+        // REVIEW: technically, this call isn't strictly necessary, since we'll find the type during the call to resolveTypeMembers id:499 gh:500
         var aliasedModSymbol = findSymbolFromAlias(importDecl.alias, { topLevelScope: scopeChain, members: null, tcContext: context });
         var isGlobal = context.scopeChain.container == context.checker.gloMod;
 
@@ -266,7 +266,7 @@ module TypeScript {
         if (context.scopeChain.moduleDecl) {
             context.scopeChain.moduleDecl.recordNonInterface();
         }
-        // REVIEW: If multiple disparate module decls for the same module don't agree
+        // REVIEW: If multiple disparate module decls for the same module don't agree id:382 gh:383
         // in export privileges, how should we handle it?
         if (isExported) {
             typeSymbol.flags |= SymbolFlags.Exported;
@@ -435,7 +435,7 @@ module TypeScript {
                                         context.checker.locationInfo.unitIndex,
                                         interfaceType);
             interfaceType.symbol = interfaceSymbol;
-            // REVIEW: Shouldn't allocate another table for interface privates
+            // REVIEW: Shouldn't allocate another table for interface privates id:430 gh:431
             interfaceType.members = new ScopedMembers(new DualStringHashTable(new StringHashTable(), new StringHashTable()));
             interfaceType.ambientMembers = new ScopedMembers(new DualStringHashTable(new StringHashTable(), new StringHashTable()));
             interfaceSymbol.declAST = interfaceDecl;
@@ -463,7 +463,7 @@ module TypeScript {
 
         if (!alreadyInScope) {
             context.scopeChain.scope.enter(context.scopeChain.container, ast,
-                                            interfaceSymbol, context.checker.errorReporter, isGlobal || isExported, true, false); // REVIEW: Technically, interfaces should be ambient
+                                            interfaceSymbol, context.checker.errorReporter, isGlobal || isExported, true, false); // REVIEW: Technically, interfaces should be ambient id:465 gh:466
         }
         pushTypeCollectionScope(interfaceSymbol, interfaceType.members, interfaceType.ambientMembers, null, null,
                                 context, interfaceType, null, null);
@@ -577,7 +577,7 @@ module TypeScript {
     export function preCollectFuncDeclTypes(ast: AST, parent: AST, context: TypeCollectionContext) {
         var scopeChain = context.scopeChain;
 
-        // REVIEW: This will have to change when we move to "export"
+        // REVIEW: This will have to change when we move to "export" id:412 gh:413
         if (context.scopeChain.moduleDecl) {
             context.scopeChain.moduleDecl.recordNonInterface();
         }
@@ -626,7 +626,7 @@ module TypeScript {
                     fgSym = containerSym.type.members.allMembers.lookup(nameText);
                 }
                 else {
-                    // REVIEW: This logic should be symmetric with preCollectClassTypes
+                    // REVIEW: This logic should be symmetric with preCollectClassTypes id:500 gh:501
                     fgSym = <TypeSymbol>containerScope.findLocal(nameText, false, false);
                     
                     // If we could not find the function symbol in the value context, look
@@ -650,7 +650,7 @@ module TypeScript {
             }
             
             // a function with this symbol has not yet been declared in this scope
-            // REVIEW: In the code below, we need to ensure that only function overloads are considered
+            // REVIEW: In the code below, we need to ensure that only function overloads are considered id:385 gh:387
             //  (E.g., if a vardecl has the same id as a function or class, we may use the vardecl symbol
             //  as the overload.)  Defensively, however, the vardecl won't have a type yet, so it should
             //  suffice to just check for a null type when considering the overload symbol in
@@ -714,7 +714,7 @@ module TypeScript {
                 }                
             }
 
-            // REVIEW: Move this check into the typecheck phase?  It's only being run over properties...
+            // REVIEW: Move this check into the typecheck phase?  It's only being run over properties... id:434 gh:435
             if (fgSym &&
                 !fgSym.isAccessor() &&
                 fgSym.type &&
@@ -738,7 +738,7 @@ module TypeScript {
             }
 
             funcDecl.type.symbol.declAST = ast;
-            if (funcDecl.isConstructor) { // REVIEW: Remove when classes completely replace oldclass
+            if (funcDecl.isConstructor) { // REVIEW: Remove when classes completely replace oldclass id:474 gh:475
                 go = true;
             };
         }

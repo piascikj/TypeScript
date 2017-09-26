@@ -66,7 +66,7 @@ const cmdLineOptions = minimist(process.argv.slice(2), {
 
 function exec(cmd: string, args: string[], complete: () => void = (() => { }), error: (e: any, status: number) => void = (() => { })) {
     console.log(`${cmd} ${args.join(" ")}`);
-    // TODO (weswig): Update child_process types to add windowsVerbatimArguments to the type definition
+    // TODO (weswig): Update child_process types to add windowsVerbatimArguments to the type definition id:0 gh:1
     const subshellFlag = isWin ? "/c" : "-c";
     const command = isWin ? [possiblyQuote(cmd), ...args] : [`${cmd} ${args.join(" ")}`];
     const ex = cp.spawn(isWin ? "cmd" : "/bin/sh", [subshellFlag, ...command], { stdio: "inherit", windowsVerbatimArguments: true } as any);

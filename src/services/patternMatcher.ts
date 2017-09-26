@@ -491,7 +491,7 @@ namespace ts {
             return false;
         }
 
-        // TODO: find a way to determine this for any unicode characters in a
+        // TODO: find a way to determine this for any unicode characters in a id:276 gh:277
         // non-allocating manner.
         const str = String.fromCharCode(ch);
         return str === str.toUpperCase();
@@ -508,7 +508,7 @@ namespace ts {
         }
 
 
-        // TODO: find a way to determine this for any unicode characters in a
+        // TODO: find a way to determine this for any unicode characters in a id:340 gh:341
         // non-allocating manner.
         const str = String.fromCharCode(ch);
         return str === str.toLowerCase();
@@ -550,13 +550,13 @@ namespace ts {
             return ch;
         }
 
-        // TODO: find a way to compute this for any unicode characters in a
+        // TODO: find a way to compute this for any unicode characters in a id:379 gh:380
         // non-allocating manner.
         return String.fromCharCode(ch).toLowerCase().charCodeAt(0);
     }
 
     function isDigit(ch: number) {
-        // TODO(cyrusn): Find a way to support this for unicode digits.
+        // TODO (cyrusn): Find a way to support this for unicode digits. id:285 gh:286
         return ch >= CharacterCodes._0 && ch <= CharacterCodes._9;
     }
 

@@ -8,7 +8,7 @@ function verifyIndentationAfterNewLine(marker: string, indentation: number): voi
     verify.indentationIs(indentation);
 }
 
-// TODO (arozga): fix this.
+// TODO (arozga): fix this. id:447 gh:449
 // verifyIndentationAfterNewLine("1", 4);
 verifyIndentationAfterNewLine("1", 0);
 verifyIndentationAfterNewLine("2", 8);

@@ -231,7 +231,7 @@ namespace Playback {
                 // Because extensions is an array of all allowed extension, we will want to merge each of the replayLog.directoriesRead into one
                 // if each of the directoriesRead has matched path with the given path (directory with same path but different extension will considered
                 // different entry).
-                // TODO (yuisu): We can certainly remove these once we recapture the RWC using new API
+                // TODO (yuisu): We can certainly remove these once we recapture the RWC using new API id:245 gh:244
                 const normalizedPath = ts.normalizePath(path).toLowerCase();
                 return ts.flatMap(replayLog.directoriesRead, directory => {
                     if (ts.normalizeSlashes(directory.path).toLowerCase() === normalizedPath) {

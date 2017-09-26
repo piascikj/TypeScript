@@ -3012,7 +3012,7 @@ namespace ts {
                 // It's not uncommon during typing for the user to miss writing the '=' token.  Check if
                 // there is no newline after the last token and if we're on an expression.  If so, parse
                 // this as an equals-value clause with a missing equals.
-                // NOTE: There are two places where we allow equals-value clauses.  The first is in a
+                // NOTE: There are two places where we allow equals-value clauses.  The first is in a id:215 gh:216
                 // variable declarator.  The second is with a parameter.  For variable declarators
                 // it's more likely that a { would be a allowed (as an object literal).  While this
                 // is also allowed for parameters, the risk is that we consume the { as an object
@@ -4454,7 +4454,7 @@ namespace ts {
             }
 
             // check if it is short-hand property assignment or normal property assignment
-            // NOTE: if token is EqualsToken it is interpreted as CoverInitializedName production
+            // NOTE: if token is EqualsToken it is interpreted as CoverInitializedName production id:260 gh:261
             // CoverInitializedName[Yield] :
             //     IdentifierReference[?Yield] Initializer[In, ?Yield]
             // this is necessary because ObjectLiteral productions are also used to cover grammar for ObjectAssignmentPattern
@@ -4775,7 +4775,7 @@ namespace ts {
             return finishNode(node);
         }
 
-        // TODO: Review for error recovery
+        // TODO: Review for error recovery id:313 gh:314
         function parseTryStatement(): TryStatement {
             const node = <TryStatement>createNode(SyntaxKind.TryStatement);
 
@@ -6247,7 +6247,7 @@ namespace ts {
                                 if (state === JSDocState.BeginningOfLine || state === JSDocState.SawAsterisk) {
                                     removeTrailingNewlines(comments);
                                     parseTag(indent);
-                                    // NOTE: According to usejsdoc.org, a tag goes to end of line, except the last tag.
+                                    // NOTE: According to usejsdoc.org, a tag goes to end of line, except the last tag. id:225 gh:226
                                     // Real-world comments may break this rule, so "BeginningOfLine" will not be a real line beginning
                                     // for malformed examples like `/** @param {string} x @returns {number} the length */`
                                     state = JSDocState.BeginningOfLine;

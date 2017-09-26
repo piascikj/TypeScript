@@ -10,7 +10,7 @@
 ////x;|]
 
 goTo.file("/b.ts");
-// TODO:GH#18445
+// TODO: GH#18445 id:470 gh:471
 verify.rangeAfterCodeFix(`import { x } from "./a";\r
 \r
 export { x } from "./a";

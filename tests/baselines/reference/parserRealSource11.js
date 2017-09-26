@@ -14,7 +14,7 @@ module TypeScript {
         public type: Type = null;
         public flags = ASTFlags.Writeable;
 
-        // REVIEW: for diagnostic purposes
+        // REVIEW: for diagnostic purposes id:361 gh:362
         public passCreated: number = CompilerDiagnostics.analysisPass;
 
         public preComments: Comment[] = null;
@@ -367,7 +367,7 @@ module TypeScript {
 
         public addToControlFlow(context: ControlFlowContext): void {
             super.addToControlFlow(context);
-            // TODO: add successor as catch block/finally block if present
+            // TODO: add successor as catch block/finally block if present id:457 gh:459
             if (this.nodeType == NodeType.Throw) {
                 context.returnStmt();
             }
@@ -426,7 +426,7 @@ module TypeScript {
                     return this;
 
                 case NodeType.Void:
-                    // REVIEW - Although this is good to do for completeness's sake,
+                    // REVIEW - Although this is good to do for completeness's sake, id:304 gh:305
                     // this shouldn't be strictly necessary from the void operator's
                     // point of view
                     this.operand = typeFlow.typeCheck(this.operand);
@@ -837,7 +837,7 @@ module TypeScript {
 
         public emit(emitter: Emitter, tokenId: TokenID, startLine: boolean) {
             var mod = <ModuleType>this.alias.type;
-            // REVIEW: Only modules may be aliased for now, though there's no real
+            // REVIEW: Only modules may be aliased for now, though there's no real id:269 gh:270
             // restriction on what the type symbol may be
             if (!this.isDynamicImport || (this.id.sym && !(<TypeSymbol>this.id.sym).onlyReferencedAsTypeRef)) {
                 var prevModAliasId = emitter.modAliasId;
@@ -1500,7 +1500,7 @@ module TypeScript {
             }
             context.current = afterLoop;
             condBlock.addSuccessor(afterLoop);
-            // TODO: check for while (true) and then only continue if afterLoop has predecessors
+            // TODO: check for while (true) and then only continue if afterLoop has predecessors id:414 gh:415
             context.noContinuation = false;
             context.walker.options.goChildren = false;
         }
@@ -1553,7 +1553,7 @@ module TypeScript {
                 var loopEnd = context.current;
                 loopEnd.addSuccessor(loopStart);
                 context.addContent(this.cond);
-                // TODO: check for while (true) 
+                // TODO: check for while (true)  id:363 gh:364
                 context.current = afterLoop;
                 loopEnd.addSuccessor(afterLoop);
             }
@@ -2038,12 +2038,12 @@ module TypeScript {
             return this;
         }
 
-        // TODO: more reasoning about unreachable cases (such as duplicate literals as case expressions)
+        // TODO: more reasoning about unreachable cases (such as duplicate literals as case expressions) id:459 gh:457
         // for now, assume all cases are reachable, regardless of whether some cases fall through
         public addToControlFlow(context: ControlFlowContext) {
             var execBlock = new BasicBlock();
             var sw = context.currentSwitch[context.currentSwitch.length - 1];
-            // TODO: fall-through from previous (+ to end of switch)
+            // TODO: fall-through from previous (+ to end of switch) id:306 gh:307
             if (this.expr) {
                 var exprBlock = new BasicBlock();
                 context.current = exprBlock;
@@ -2283,7 +2283,7 @@ module TypeScript {
             this.body = typeFlow.typeCheck(this.body);
 
             // if we're in provisional typecheck mode, clean up the symbol entry
-            // REVIEW: This is obviously bad form, since we're counting on the internal
+            // REVIEW: This is obviously bad form, since we're counting on the internal id:273 gh:275
             // layout of the symbol table, but this is also the only place where we insert
             // symbols during typecheck
             if (typeFlow.checker.inProvisionalTypecheckMode()) {
@@ -2395,7 +2395,7 @@ var TypeScript;
             _this.nodeType = nodeType;
             _this.type = null;
             _this.flags = ASTFlags.Writeable;
-            // REVIEW: for diagnostic purposes
+            // REVIEW: for diagnostic purposes id:417 gh:418
             _this.passCreated = CompilerDiagnostics.analysisPass;
             _this.preComments = null;
             _this.postComments = null;
@@ -2729,7 +2729,7 @@ var TypeScript;
         }
         UnaryExpression.prototype.addToControlFlow = function (context) {
             _super.prototype.addToControlFlow.call(this, context);
-            // TODO: add successor as catch block/finally block if present
+            // TODO: add successor as catch block/finally block if present id:365 gh:366
             if (this.nodeType == NodeType.Throw) {
                 context.returnStmt();
             }
@@ -2775,7 +2775,7 @@ var TypeScript;
                     this.type = this.castTerm.type;
                     return this;
                 case NodeType.Void:
-                    // REVIEW - Although this is good to do for completeness's sake,
+                    // REVIEW - Although this is good to do for completeness's sake, id:462 gh:462
                     // this shouldn't be strictly necessary from the void operator's
                     // point of view
                     this.operand = typeFlow.typeCheck(this.operand);
@@ -3186,7 +3186,7 @@ var TypeScript;
         ImportDeclaration.prototype.isStatementOrExpression = function () { return true; };
         ImportDeclaration.prototype.emit = function (emitter, tokenId, startLine) {
             var mod = this.alias.type;
-            // REVIEW: Only modules may be aliased for now, though there's no real
+            // REVIEW: Only modules may be aliased for now, though there's no real id:308 gh:309
             // restriction on what the type symbol may be
             if (!this.isDynamicImport || (this.id.sym && !this.id.sym.onlyReferencedAsTypeRef)) {
                 var prevModAliasId = emitter.modAliasId;
@@ -3814,7 +3814,7 @@ var TypeScript;
             }
             context.current = afterLoop;
             condBlock.addSuccessor(afterLoop);
-            // TODO: check for while (true) and then only continue if afterLoop has predecessors
+            // TODO: check for while (true) and then only continue if afterLoop has predecessors id:278 gh:279
             context.noContinuation = false;
             context.walker.options.goChildren = false;
         };
@@ -3866,7 +3866,7 @@ var TypeScript;
                 var loopEnd = context.current;
                 loopEnd.addSuccessor(loopStart);
                 context.addContent(this.cond);
-                // TODO: check for while (true) 
+                // TODO: check for while (true)  id:419 gh:420
                 context.current = afterLoop;
                 loopEnd.addSuccessor(afterLoop);
             }
@@ -4333,12 +4333,12 @@ var TypeScript;
             this.type = typeFlow.voidType;
             return this;
         };
-        // TODO: more reasoning about unreachable cases (such as duplicate literals as case expressions)
+        // TODO: more reasoning about unreachable cases (such as duplicate literals as case expressions) id:367 gh:368
         // for now, assume all cases are reachable, regardless of whether some cases fall through
         CaseStatement.prototype.addToControlFlow = function (context) {
             var execBlock = new BasicBlock();
             var sw = context.currentSwitch[context.currentSwitch.length - 1];
-            // TODO: fall-through from previous (+ to end of switch)
+            // TODO: fall-through from previous (+ to end of switch) id:466 gh:467
             if (this.expr) {
                 var exprBlock = new BasicBlock();
                 context.current = exprBlock;
@@ -4576,7 +4576,7 @@ var TypeScript;
             typeFlow.scope.enter(exceptVar.symbol.container, this.param, exceptVar.symbol, typeFlow.checker.errorReporter, false, false, false);
             this.body = typeFlow.typeCheck(this.body);
             // if we're in provisional typecheck mode, clean up the symbol entry
-            // REVIEW: This is obviously bad form, since we're counting on the internal
+            // REVIEW: This is obviously bad form, since we're counting on the internal id:311 gh:312
             // layout of the symbol table, but this is also the only place where we insert
             // symbols during typecheck
             if (typeFlow.checker.inProvisionalTypecheckMode()) {

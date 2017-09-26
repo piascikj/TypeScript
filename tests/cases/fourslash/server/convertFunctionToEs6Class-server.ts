@@ -12,7 +12,7 @@
 //// }
 
 verify.applicableRefactorAvailableAtMarker('1');
-// NOTE: '// Comment' should be included, but due to incorrect handling of trivia,
+// NOTE: '// Comment' should be included, but due to incorrect handling of trivia, id:508 gh:510
 // it's omitted right now.
 verify.fileAfterApplyingRefactorAtMarker('1',
 `class fn {

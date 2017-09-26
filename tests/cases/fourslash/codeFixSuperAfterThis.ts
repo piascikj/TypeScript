@@ -9,7 +9,7 @@
 ////        super();
 ////    |]}
 ////}
-// TODO: GH#18445
+// TODO: GH#18445 id:504 gh:505
 verify.rangeAfterCodeFix(`
         super();\r
         this.a = 12;

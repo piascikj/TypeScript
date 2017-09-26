@@ -340,7 +340,7 @@ namespace ts.SignatureHelp {
             }
 
 
-            // TODO: Handle generic call with incomplete syntax
+            // TODO: Handle generic call with incomplete syntax id:289 gh:290
         }
         return undefined;
     }

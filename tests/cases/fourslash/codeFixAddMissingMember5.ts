@@ -17,4 +17,4 @@ verify.currentFileContentIs(`class C {
         ()=>{ this.foo === 10 };
     }
 }
-C.foo = undefined;` + "\r\n"); // TODO: GH#18445
+C.foo = undefined;` + "\r\n"); // TODO: GH#18445 id:503 gh:504
