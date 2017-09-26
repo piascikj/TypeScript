@@ -44,7 +44,7 @@ module TypeScript {
         Func = 1 << 28, // FUNCTION
         EOF = 1 << 29, // EOF
 
-        // REVIEW: Name this something clearer.
+        // REVIEW: Name this something clearer. id:380 gh:381
         TypeScriptS = 1 << 30, // PROPERTY, PRIVATE, STATIC, INTERFACE, CLASS, MODULE, EXPORT, IMPORT
         ExprStart = SColon | AddOp | LCurly | PreOp | RegExp | LParen | LBrack | ID | Prefix | RLit | Func | Literal,
         StmtStart = ExprStart | SColon | Var | Stmt | While | TypeScriptS,
@@ -88,7 +88,7 @@ module TypeScript {
         PossibleOptionalParameter = 1 << 8,
         ClassBaseConstructorCall = 1 << 9,
         OptionalName = 1 << 10,
-        // REVIEW: This flag is to mark lambda nodes to note that the LParen of an expression has already been matched in the lambda header.
+        // REVIEW: This flag is to mark lambda nodes to note that the LParen of an expression has already been matched in the lambda header. id:427 gh:428
         //         The flag is used to communicate this piece of information to the calling parseTerm, which intern will remove it.
         //         Once we have a better way to associate information with nodes, this flag should not be used.
         SkipNextRParen = 1 << 11, 

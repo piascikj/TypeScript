@@ -209,7 +209,7 @@ namespace ts.JsDoc {
         // * The opening comment line
         // * the first line (without a param) for the object's untagged info (this is also where the caret ends up)
         // * the '@param'-tagged lines
-        // * TODO: other tags.
+        // * TODO: other tags. id:337 gh:338
         // * the closing comment line
         // * if the caret was directly in front of the object, then we add an extra line and indentation.
         const preamble = "/**" + newLine +
@@ -228,7 +228,7 @@ namespace ts.JsDoc {
         readonly parameters?: ReadonlyArray<ParameterDeclaration>;
     }
     function getCommentOwnerInfo(tokenAtPos: Node): CommentOwnerInfo | undefined {
-        // TODO: add support for:
+        // TODO: add support for: id:376 gh:377
         // - enums/enum members
         // - interfaces
         // - property declarations

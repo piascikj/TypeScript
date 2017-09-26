@@ -5,7 +5,7 @@ declare var require:any;
 var HTMLDOMPropertyConfig = require('react/lib/HTMLDOMPropertyConfig');
 
 // Populate property map with ReactJS's attribute and property mappings
-// TODO handle/use .Properties value eg: MUST_USE_PROPERTY is not HTML attr
+// TODO handle/use .Properties value eg: MUST_USE_PROPERTY is not HTML attr id:450 gh:451
 for (var propname in HTMLDOMPropertyConfig.Properties) {
   if (!HTMLDOMPropertyConfig.Properties.hasOwnProperty(propname)) {
     continue;

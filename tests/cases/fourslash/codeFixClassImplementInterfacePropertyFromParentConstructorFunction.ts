@@ -8,7 +8,7 @@
 
 verify.not.codeFixAvailable();
 
-// TODO: (arozga) Get this working.
+// TODO: (arozga) Get this working. id:458 gh:460
 /*
 verify.rangeAfterCodeFix(`
 public x: number;

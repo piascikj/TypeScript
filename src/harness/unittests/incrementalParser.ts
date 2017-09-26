@@ -42,7 +42,7 @@ namespace ts {
         }
     }
 
-    // NOTE: 'reusedElements' is the expected count of elements reused from the old tree to the new
+    // NOTE: 'reusedElements' is the expected count of elements reused from the old tree to the new id:336 gh:337
     // tree.  It may change as we tweak the parser.  If the count increases then that should always
     // be a good thing.  If it decreases, that's not great (less reusability), but that may be
     // unavoidable.  If it does decrease an investigation should be done to make sure that things

@@ -6,7 +6,7 @@
 ////    constructor() {[|
 ////    |]}
 ////}
-// TODO: GH#18445
+// TODO: GH#18445 id:398 gh:399
 verify.rangeAfterCodeFix(`
         super();\r
     `, /*includeWhitespace*/ true);

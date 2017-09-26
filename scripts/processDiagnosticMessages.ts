@@ -17,7 +17,7 @@ function main(): void {
     }
 
     function writeFile(fileName: string, contents: string) {
-        // TODO: Fix path joining
+        // TODO: Fix path joining id:257 gh:258
         var inputDirectory = inputFilePath.substr(0,inputFilePath.lastIndexOf("/"));
         var fileOutputPath = inputDirectory + "/" + fileName;
         sys.writeFile(fileOutputPath, contents);

@@ -103,7 +103,7 @@ namespace ts {
         return aggregateTransformFlags(inlineExpressions(expressions)) || createOmittedExpression();
 
         function emitExpression(expression: Expression) {
-            // NOTE: this completely disables source maps, but aligns with the behavior of
+            // NOTE: this completely disables source maps, but aligns with the behavior of id:263 gh:264
             //       `emitAssignment` in the old emitter.
             setEmitFlags(expression, EmitFlags.NoNestedSourceMaps);
             aggregateTransformFlags(expression);

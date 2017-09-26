@@ -1602,7 +1602,7 @@ namespace ts {
         expression: Expression;
     }
 
-    // NOTE: MetaProperty is really a MemberExpression, but we consider it a PrimaryExpression
+    // NOTE: MetaProperty is really a MemberExpression, but we consider it a PrimaryExpression id:234 gh:235
     //       for the same reasons we treat NewExpression as a PrimaryExpression.
     export interface MetaProperty extends PrimaryExpression {
         kind: SyntaxKind.MetaProperty;
@@ -4372,7 +4372,7 @@ namespace ts {
          * Hook used by transformers to substitute expressions just before they
          * are emitted by the pretty printer.
          *
-         * NOTE: Transformation hooks should only be modified during `Transformer` initialization,
+         * NOTE: Transformation hooks should only be modified during `Transformer` initialization, id:176 gh:177
          * before returning the `NodeTransformer` callback.
          */
         onSubstituteNode: (hint: EmitHint, node: Node) => Node;
@@ -4393,7 +4393,7 @@ namespace ts {
          * Hook used to allow transformers to capture state before or after
          * the printer emits a node.
          *
-         * NOTE: Transformation hooks should only be modified during `Transformer` initialization,
+         * NOTE: Transformation hooks should only be modified during `Transformer` initialization, id:227 gh:228
          * before returning the `NodeTransformer` callback.
          */
         onEmitNode: (hint: EmitHint, node: Node, emitCallback: (hint: EmitHint, node: Node) => void) => void;

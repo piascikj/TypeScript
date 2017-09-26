@@ -1402,7 +1402,7 @@ namespace Harness {
                             const length = (end - err.start) - Math.max(0, thisLineStart - err.start);
                             // Calculate the start of the squiggle
                             const squiggleStart = Math.max(0, relativeOffset);
-                            // TODO/REVIEW: this doesn't work quite right in the browser if a multi file test has files whose names are just the right length relative to one another
+                            // TODO /REVIEW: this doesn't work quite right in the browser if a multi file test has files whose names are just the right length relative to one another id:331 gh:332
                             outputLines += (newLine() + "    " + line.substr(0, squiggleStart).replace(/[^\s]/g, " ") + new Array(Math.min(length, line.length - squiggleStart) + 1).join("~"));
 
                             // If the error ended here, or we're at the end of the file, emit its message

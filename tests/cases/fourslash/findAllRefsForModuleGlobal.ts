@@ -13,5 +13,5 @@ verify.noErrors();
 const ranges = test.ranges();
 const [r0, r1, r2] = ranges;
 verify.referenceGroups([r1, r2], [{ definition: 'module "/node_modules/foo/index"', ranges: [r0, r1, r2] }]);
-// TODO:GH#15736
+// TODO: GH#15736 id:506 gh:508
 verify.referenceGroups(r0, undefined);

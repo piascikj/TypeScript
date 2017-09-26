@@ -231,7 +231,7 @@ namespace ts.server {
             const args: protocol.FormatRequestArgs = this.createFileLocationRequestArgsWithEndLineAndOffset(file, start, end);
 
 
-            // TODO: handle FormatCodeOptions
+            // TODO: handle FormatCodeOptions id:315 gh:316
             const request = this.processRequest<protocol.FormatRequest>(CommandNames.Format, args);
             const response = this.processResponse<protocol.FormatResponse>(request);
 
@@ -245,7 +245,7 @@ namespace ts.server {
         getFormattingEditsAfterKeystroke(fileName: string, position: number, key: string, _options: FormatCodeOptions): ts.TextChange[] {
             const args: protocol.FormatOnKeyRequestArgs = { ...this.createFileLocationRequestArgs(fileName, position), key };
 
-            // TODO: handle FormatCodeOptions
+            // TODO: handle FormatCodeOptions id:358 gh:360
             const request = this.processRequest<protocol.FormatOnKeyRequest>(CommandNames.Formatonkey, args);
             const response = this.processResponse<protocol.FormatResponse>(request);
 

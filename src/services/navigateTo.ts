@@ -174,7 +174,7 @@ namespace ts.NavigateTo {
     }
 
     function compareNavigateToItems(i1: RawNavigateToItem, i2: RawNavigateToItem): number {
-        // TODO(cyrusn): get the gamut of comparisons that VS already uses here.
+        // TODO (cyrusn): get the gamut of comparisons that VS already uses here. id:282 gh:283
         // Right now we just sort by kind first, and then by name of the item.
         // We first sort case insensitively.  So "Aaa" will come before "bar".
         // Then we sort case sensitively, so "aaa" will come before "Aaa".
@@ -195,7 +195,7 @@ namespace ts.NavigateTo {
             isCaseSensitive: rawItem.isCaseSensitive,
             fileName: rawItem.fileName,
             textSpan: createTextSpanFromNode(declaration),
-            // TODO(jfreeman): What should be the containerName when the container has a computed name?
+            // TODO (jfreeman): What should be the containerName when the container has a computed name? id:205 gh:206
             containerName: containerName ? (<Identifier>containerName).text : "",
             containerKind: containerName ? getNodeKind(container) : ScriptElementKind.unknown
         };

@@ -682,7 +682,7 @@ namespace ts.FindAllReferences.Core {
     function getPossibleSymbolReferencePositions(sourceFile: SourceFile, symbolName: string, container: Node = sourceFile): number[] {
         const positions: number[] = [];
 
-        /// TODO: Cache symbol existence for files to save text search
+        /// TODO: Cache symbol existence for files to save text search id:203 gh:204
         // Also, need to make this work for unicode escapes.
 
         // Be resilient in the face of a symbol with no name or zero length name

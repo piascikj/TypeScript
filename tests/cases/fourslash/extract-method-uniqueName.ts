@@ -3,7 +3,7 @@
 ////// newFunction
 /////*start*/1 + 1/*end*/;
 
-// NOTE: '// newFunction' should be included, but due to incorrect handling of trivia,
+// NOTE: '// newFunction' should be included, but due to incorrect handling of trivia, id:401 gh:402
 // it's omitted right now.
 goTo.select('start', 'end')
 edit.applyRefactor({

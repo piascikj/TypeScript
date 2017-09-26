@@ -3,7 +3,7 @@
 // @allowJs: true
 // @Filename: /a.js
 
-// TODO: https://github.com/Microsoft/TypeScript/issues/16411
+// TODO: https://github.com/Microsoft/TypeScript/issues/16411 id:443 gh:444
 // Both uses of T should be referenced.
 
 /////** @template [|{| "isWriteAccess": true, "isDefinition": true |}T|] */

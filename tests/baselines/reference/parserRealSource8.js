@@ -190,7 +190,7 @@ module TypeScript {
 
         // if this is not a method, but enclosed by class, use constructor as
         // the enclosing scope
-        // REVIEW: Some twisted logic here - this needs to be cleaned up once old classes are removed
+        // REVIEW: Some twisted logic here - this needs to be cleaned up once old classes are removed id:439 gh:440
         //  - if it's a new class, always use the contained scope, since we initialize the constructor scope below
         if (context.scopeChain.thisType &&
             (!funcDecl.isConstructor || hasFlag(funcDecl.fncFlags, FncFlags.ClassMethod))) {
@@ -264,7 +264,7 @@ module TypeScript {
                 }
             }
 
-            // REVIEW: We don't search for another sym for accessors to prevent us from
+            // REVIEW: We don't search for another sym for accessors to prevent us from id:386 gh:388
             // accidentally coalescing function signatures with the same name (E.g., a function
             // 'f' the outer scope and a setter 'f' in an object literal within that scope)
             if (nameText && nameText != "__missing" && !funcDecl.isAccessor()) {
@@ -272,7 +272,7 @@ module TypeScript {
                     fgSym = funcScope.findLocal(nameText, false, false);
                 }
                 else {
-                    // REVIEW: This logic should be symmetric with preCollectClassTypes
+                    // REVIEW: This logic should be symmetric with preCollectClassTypes id:480 gh:481
                     fgSym = funcScope.findLocal(nameText, false, false);
                 }
             }
@@ -316,7 +316,7 @@ module TypeScript {
         var ambientFuncStaticTable = new StringHashTable();
         var ambientFuncStaticMembers = new ScopedMembers(new DualStringHashTable(ambientFuncStaticTable, new StringHashTable()));
 
-        // REVIEW: Is it a problem that this is being set twice for properties and constructors?
+        // REVIEW: Is it a problem that this is being set twice for properties and constructors? id:330 gh:331
         funcDecl.unitIndex = context.typeFlow.checker.locationInfo.unitIndex;
 
         var locals = new SymbolScopeBuilder(funcMembers, ambientFuncMembers, null, null, parentScope, localContainer);
@@ -379,7 +379,7 @@ module TypeScript {
     export function preAssignCatchScopes(ast: AST, context: AssignScopeContext) {
         var catchBlock = <Catch>ast;
         if (catchBlock.param) {
-            var catchTable = new ScopedMembers(new DualStringHashTable(new StringHashTable(), new StringHashTable())); // REVIEW: Should we be allocating a public table instead of a private one?
+            var catchTable = new ScopedMembers(new DualStringHashTable(new StringHashTable(), new StringHashTable())); // REVIEW: Should we be allocating a public table instead of a private one? id:345 gh:346
             var catchLocals = new SymbolScopeBuilder(catchTable, null, null, null, context.scopeChain.scope,
                                                    context.scopeChain.scope.container);
             catchBlock.containedScope = catchLocals;
@@ -630,7 +630,7 @@ var TypeScript;
         var parentScope = isInnerStatic ? context.scopeChain.fnc.type.memberScope : context.scopeChain.scope;
         // if this is not a method, but enclosed by class, use constructor as
         // the enclosing scope
-        // REVIEW: Some twisted logic here - this needs to be cleaned up once old classes are removed
+        // REVIEW: Some twisted logic here - this needs to be cleaned up once old classes are removed id:440 gh:441
         //  - if it's a new class, always use the contained scope, since we initialize the constructor scope below
         if (context.scopeChain.thisType &&
             (!funcDecl.isConstructor || hasFlag(funcDecl.fncFlags, FncFlags.ClassMethod))) {
@@ -697,7 +697,7 @@ var TypeScript;
                     funcScope = context.scopeChain.scope;
                 }
             }
-            // REVIEW: We don't search for another sym for accessors to prevent us from
+            // REVIEW: We don't search for another sym for accessors to prevent us from id:388 gh:390
             // accidentally coalescing function signatures with the same name (E.g., a function
             // 'f' the outer scope and a setter 'f' in an object literal within that scope)
             if (nameText && nameText != "__missing" && !funcDecl.isAccessor()) {
@@ -705,7 +705,7 @@ var TypeScript;
                     fgSym = funcScope.findLocal(nameText, false, false);
                 }
                 else {
-                    // REVIEW: This logic should be symmetric with preCollectClassTypes
+                    // REVIEW: This logic should be symmetric with preCollectClassTypes id:482 gh:483
                     fgSym = funcScope.findLocal(nameText, false, false);
                 }
             }
@@ -739,7 +739,7 @@ var TypeScript;
         var funcStaticMembers = new ScopedMembers(new DualStringHashTable(funcStaticTable, new StringHashTable()));
         var ambientFuncStaticTable = new StringHashTable();
         var ambientFuncStaticMembers = new ScopedMembers(new DualStringHashTable(ambientFuncStaticTable, new StringHashTable()));
-        // REVIEW: Is it a problem that this is being set twice for properties and constructors?
+        // REVIEW: Is it a problem that this is being set twice for properties and constructors? id:333 gh:334
         funcDecl.unitIndex = context.typeFlow.checker.locationInfo.unitIndex;
         var locals = new SymbolScopeBuilder(funcMembers, ambientFuncMembers, null, null, parentScope, localContainer);
         var statics = new SymbolScopeBuilder(funcStaticMembers, ambientFuncStaticMembers, null, null, parentScope, null);
@@ -790,7 +790,7 @@ var TypeScript;
     function preAssignCatchScopes(ast, context) {
         var catchBlock = ast;
         if (catchBlock.param) {
-            var catchTable = new ScopedMembers(new DualStringHashTable(new StringHashTable(), new StringHashTable())); // REVIEW: Should we be allocating a public table instead of a private one?
+            var catchTable = new ScopedMembers(new DualStringHashTable(new StringHashTable(), new StringHashTable())); // REVIEW: Should we be allocating a public table instead of a private one? id:349 gh:350
             var catchLocals = new SymbolScopeBuilder(catchTable, null, null, null, context.scopeChain.scope, context.scopeChain.scope.container);
             catchBlock.containedScope = catchLocals;
             pushAssignScope(catchLocals, context, context.scopeChain.thisType, context.scopeChain.classType, context.scopeChain.fnc);

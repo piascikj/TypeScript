@@ -567,7 +567,7 @@ namespace ts.projectSystem {
             const base = getDirectoryPath(f.path);
             if (base !== f.path && !this.directoryExists(base)) {
                 if (createParentDirectory) {
-                    // TODO: avoid reloading FS on every creation
+                    // TODO: avoid reloading FS on every creation id:184 gh:185
                     this.createFileOrFolder({ path: base }, createParentDirectory);
                 }
                 else {

@@ -98,8 +98,8 @@ module TypeScript {
             if (type.hasMembers()) {
                 var members = type.members;
                 var ambientMembers = type.ambientMembers;
-                var typeMembers = type.getAllEnclosedTypes(); // REVIEW: Should only be getting exported types?
-                var ambientTypeMembers = type.getAllAmbientEnclosedTypes(); // REVIEW: Should only be getting exported types?
+                var typeMembers = type.getAllEnclosedTypes(); // REVIEW: Should only be getting exported types? id:418 gh:419
+                var ambientTypeMembers = type.getAllAmbientEnclosedTypes(); // REVIEW: Should only be getting exported types? id:502 gh:503
                 var memberScope = new SymbolTableScope(members, ambientMembers, typeMembers, ambientTypeMembers, type.symbol);
                 var agg = new SymbolAggregateScope(type.symbol);
                 var prevCurrentModDecl = this.checker.currentModDecl;
@@ -111,7 +111,7 @@ module TypeScript {
                     this.checker.inBind = true;
                 }
                 if (members) {
-                    this.bind(agg, type.members.allMembers); // REVIEW: Should only be getting exported types?
+                    this.bind(agg, type.members.allMembers); // REVIEW: Should only be getting exported types? id:392 gh:393
                 }
                 if (typeMembers) {
                     this.bind(agg, typeMembers.allMembers);

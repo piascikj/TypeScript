@@ -40,7 +40,7 @@
 // src/harness/fourslash.ts API's (or the rest of the compiler) because they are unstable and complicate the
 // fourslash testing DSL. Finally, in this case, runtime reflection is (much) faster.
 //
-// TODO: figure out a better solution to the API exposure problem.
+// TODO: figure out a better solution to the API exposure problem. id:487 gh:488
 
 declare module ts {
     export type MapKey = string | number;

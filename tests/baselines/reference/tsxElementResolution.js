@@ -17,7 +17,7 @@ module Dotted {
 // Should find the intrinsic element, not the class element
 var a = <foundFirst  x="hello" />;
 var b = <string_named />;
-// TODO: This should not be a parse error (should
+// TODO: This should not be a parse error (should id:394 gh:395
 //        parse a property name here, not identifier)
 // var c = <var />;
 var d = <Other />;
@@ -47,7 +47,7 @@ var Dotted;
 // Should find the intrinsic element, not the class element
 var a = <foundFirst x="hello"/>;
 var b = <string_named />;
-// TODO: This should not be a parse error (should
+// TODO: This should not be a parse error (should id:448 gh:450
 //        parse a property name here, not identifier)
 // var c = <var />;
 var d = <Other />;

@@ -13,7 +13,7 @@ import mod = require("./aliasUsedAsNameValue_0");
 import b = require("./aliasUsedAsNameValue_1");
  
 export var a = function () {
-    //var x = mod.id; // TODO needed hack that mod is loaded
+    //var x = mod.id; // TODO needed hack that mod is loaded id:354 gh:355
     b.b(mod);
 }
 
@@ -34,6 +34,6 @@ exports.__esModule = true;
 var mod = require("./aliasUsedAsNameValue_0");
 var b = require("./aliasUsedAsNameValue_1");
 exports.a = function () {
-    //var x = mod.id; // TODO needed hack that mod is loaded
+    //var x = mod.id; // TODO needed hack that mod is loaded id:399 gh:400
     b.b(mod);
 };

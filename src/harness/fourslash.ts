@@ -2398,7 +2398,7 @@ namespace FourSlash {
             for (const codeFix of codeFixes) {
                 this.applyEdits(codeFix.changes[0].fileName, codeFix.changes[0].textChanges, /*isFormattingEdit*/ false);
                 let text = this.rangeText(ranges[0]);
-                // TODO:GH#18445 (remove this line to see errors in many `importNameCodeFix` tests)
+                // TODO: GH#18445 (remove this line to see errors in many `importNameCodeFix` tests) id:230 gh:231
                 text = text.replace(/\r\n/g, "\n");
                 actualTextArray.push(text);
                 scriptInfo.updateContent(originalContent);
@@ -2818,7 +2818,7 @@ namespace FourSlash {
                 }
             }
             else {
-                // TODO: test editInfo.renameFilename value
+                // TODO: test editInfo.renameFilename value id:309 gh:310
                 assert.isDefined(editInfo.renameFilename);
                 if (renamePosition !== editInfo.renameLocation) {
                     this.raiseError(`Expected rename position of ${renamePosition}, but got ${editInfo.renameLocation}`);

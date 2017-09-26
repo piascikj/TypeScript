@@ -406,7 +406,7 @@ namespace ts {
             setWriter(/*output*/ undefined);
         }
 
-        // TODO: Should this just be `emit`?
+        // TODO: Should this just be `emit`? id:167 gh:166
         // See https://github.com/Microsoft/TypeScript/pull/18284#discussion_r137611034
         function emitIfPresent(node: Node | undefined) {
             if (node) {

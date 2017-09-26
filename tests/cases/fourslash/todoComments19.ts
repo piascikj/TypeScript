@@ -6,6 +6,6 @@
 //// import * as foo1 from "fake-module";
 
 // @Filename: node_modules/fake-module/ts.ts
-//// // TODO
+//// // TODO id:509 gh:506
 
 verify.todoCommentsInCurrentFile(["TODO"]);

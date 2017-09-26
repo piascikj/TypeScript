@@ -1533,7 +1533,7 @@ namespace ts {
                                 // The StringLiteral must specify a top - level external module name.
                                 // Relative external module names are not permitted
 
-                                // NOTE: body of ambient module is always a module block, if it exists
+                                // NOTE: body of ambient module is always a module block, if it exists id:170 gh:171
                                 const body = <ModuleBlock>(<ModuleDeclaration>node).body;
                                 if (body) {
                                     for (const statement of body.statements) {
@@ -1647,7 +1647,7 @@ namespace ts {
             if (filesByName.has(path)) {
                 const file = filesByName.get(path);
                 // try to check if we've already seen this file but with a different casing in path
-                // NOTE: this only makes sense for case-insensitive file systems
+                // NOTE: this only makes sense for case-insensitive file systems id:218 gh:219
                 if (file && options.forceConsistentCasingInFileNames && getNormalizedAbsolutePath(file.fileName, currentDirectory) !== getNormalizedAbsolutePath(fileName, currentDirectory)) {
                     reportFileNamesDifferOnlyInCasingError(fileName, file.fileName, refFile, refPos, refEnd);
                 }

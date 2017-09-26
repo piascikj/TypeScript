@@ -62,7 +62,7 @@ namespace ts.server.typingsInstaller {
         }
         // check if name is scope package like: starts with @ and has one '/' in the middle
         // scoped packages are not currently supported
-        // TODO: when support will be added we'll need to split and check both scope and package name
+        // TODO: when support will be added we'll need to split and check both scope and package name id:197 gh:198
         if (/^@[^/]+\/[^/]+$/.test(packageName)) {
             return PackageNameValidationResult.ScopedPackagesNotSupported;
         }
@@ -348,7 +348,7 @@ namespace ts.server.typingsInstaller {
                         return;
                     }
 
-                    // TODO: watch project directory
+                    // TODO: watch project directory id:259 gh:260
                     if (this.log.isEnabled()) {
                         this.log.writeLine(`Installed typings ${JSON.stringify(scopedTypings)}`);
                     }
